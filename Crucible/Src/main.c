@@ -103,43 +103,54 @@ int main(void)
   MX_TIM5_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-
+  uint8_t pole=0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  printf("/r/n 11 /r/n");
 	  /***Ò£¿Ø°´¼ü¡¤***/
 	  switch(PS2_DataKey())
 	  {
-		  case PSB_SELECT:
+		  case PSB_SELECT: printf("%c",1);
 			  break;
-		  case PSB_L3: 
+		  case PSB_L3: printf("%c",2);
 			  break;
-		  case PSB_R3:
+		  case PSB_R3: printf("%c",2);
 			  break;
-		  case PSB_START:
+		  case PSB_START: printf("%c",2);
 			  break;
-		  case PSB_PAD_UP:
+		  case PSB_PAD_UP: printf("%c",2);
 			  break;
-		  case PSB_PAD_RIGHT:
+		  case PSB_PAD_RIGHT: printf("%c",2);
 			  break;
-		  case PSB_PAD_DOWN:
+		  case PSB_PAD_DOWN: printf("%c",2);
 			  break;
-		  case PSB_PAD_LEFT:
+		  case PSB_PAD_LEFT: printf("%c",2);
 			  break;
-		  case PSB_L2:
+		  case PSB_L2: printf("%c",2);
 			  break;
-		  case PSB_R2:
+		  case PSB_R2: printf("%c",2);
 			  break;
-		  case PSB_L1:
+		  case PSB_L1: printf("%c",2);
 			  break;
-		  case
-		  
-		  
-		  
-	  }
+		  case PSB_R1: printf("%c",2);
+			  break;
+		  case PSB_GREEN: printf("%c",2);
+			  break;
+		  case PSB_RED: printf("%c",2);
+			  break;
+		  case PSB_BLUE: printf("%c",2);
+			  break;
+		  case PSB_PINK: printf("%c",2);
+			  break;
+		  case 0: printf("%c",PS2_AnologData(PSS_RX));
+			  
+			  break;
+		  }
+	  HAL_Delay(100);
 	  
 	  
 	  
