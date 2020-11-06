@@ -48,6 +48,8 @@
 #define PSS_LX 7
 #define PSS_LY 8
 
+uint8_t PS2_AnologData(uint8_t button);
 uint8_t PS2_DataKey();
 
 #endif
+

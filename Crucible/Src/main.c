@@ -111,7 +111,35 @@ int main(void)
   while (1)
   {
 	  /***Ò£¿Ø°´¼ü¡¤***/
-	  
+	  switch(PS2_DataKey())
+	  {
+		  case PSB_SELECT:
+			  break;
+		  case PSB_L3: 
+			  break;
+		  case PSB_R3:
+			  break;
+		  case PSB_START:
+			  break;
+		  case PSB_PAD_UP:
+			  break;
+		  case PSB_PAD_RIGHT:
+			  break;
+		  case PSB_PAD_DOWN:
+			  break;
+		  case PSB_PAD_LEFT:
+			  break;
+		  case PSB_L2:
+			  break;
+		  case PSB_R2:
+			  break;
+		  case PSB_L1:
+			  break;
+		  case
+		  
+		  
+		  
+	  }
 	  
 	  
 	  

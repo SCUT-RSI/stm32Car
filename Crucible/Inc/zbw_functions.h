@@ -6,4 +6,7 @@
 
 #include "main.h"
 
+void jiaozhun(void); //Ð£×¼º¯Êý
+
 #endif
+
