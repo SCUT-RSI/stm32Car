@@ -47,6 +47,7 @@ void vl53l0x_interrupt_start(VL53L0X_Dev_t *dev,uint8_t mode)
 	 uint32_t refSpadCount;
 	 uint8_t isApertureSpads;
 	 VL53L0X_Error status=VL53L0X_ERROR_NONE;//工作状态
+	 
 
 	 
 
@@ -54,6 +55,7 @@ void vl53l0x_interrupt_start(VL53L0X_Dev_t *dev,uint8_t mode)
 		
 	 status = VL53L0X_StaticInit(dev);
 	 if(status!=VL53L0X_ERROR_NONE) goto error;
+	 
 	 status = VL53L0X_PerformRefCalibration(dev, &VhvSettings, &PhaseCal);//Ref参考校准
 	 if(status!=VL53L0X_ERROR_NONE) goto error;
 	 HAL_Delay(2);

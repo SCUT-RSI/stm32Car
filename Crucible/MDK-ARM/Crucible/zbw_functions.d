@@ -42,7 +42,7 @@ crucible\zbw_functions.o: ../Inc/vl53l0x_platform_log.h
 crucible\zbw_functions.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 crucible\zbw_functions.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 crucible\zbw_functions.o: ../Inc/vl53l0x.h
-crucible\zbw_functions.o: ../Inc/vl53l0x_it.h
+crucible\zbw_functions.o: ../Inc/vl53l0x_gen.h
 crucible\zbw_functions.o: ../Inc/motor_B.h
 crucible\zbw_functions.o: ../Inc/motor_D.h
 crucible\zbw_functions.o: ../Inc/motor.h

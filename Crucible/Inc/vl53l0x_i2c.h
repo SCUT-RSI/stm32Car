@@ -12,8 +12,8 @@
 
 
 //IO方向设置
-#define VL_SDA_IN()  {GPIOG->CRH&=0X0FFFFFFF;GPIOG->CRH|=8<<28;}
-#define VL_SDA_OUT() {GPIOG->CRH&=0X0FFFFFFF;GPIOG->CRH|=3<<28;}
+#define VL_SDA_IN()  {GPIOG->CRH&=0X0FFFFFFF;GPIOG->CRH|=(uint32_t)8<<28;}
+#define VL_SDA_OUT() {GPIOG->CRH&=0X0FFFFFFF;GPIOG->CRH|=(uint32_t)3<<28;}
 
 
 //IO操作函数	 

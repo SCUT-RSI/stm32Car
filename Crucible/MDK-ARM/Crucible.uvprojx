@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE,USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;                             ../Drivers/STM32F1xx_HAL_Driver/Inc;                             ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;                             ../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Inc;                                ../Drivers/STM32F1xx_HAL_Driver/Inc;                                ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;                                ../Drivers/CMSIS/Device/ST/STM32F1xx/Include;   ../Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -473,14 +473,14 @@
               <FilePath>..\Lazer_Src\vl53l0x_i2c.c</FilePath>
             </File>
             <File>
-              <FileName>vl53l0x_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lazer_Src\vl53l0x_it.c</FilePath>
-            </File>
-            <File>
               <FileName>vl53l0x_platform.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lazer_Src\vl53l0x_platform.c</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_gen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lazer_Src\vl53l0x_gen.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -523,9 +523,6 @@
               <FilePath>..\Lazer_drive\vl53l0x_api_strings.c</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>
           <GroupName>Drivers/STM32F1xx_HAL_Driver</GroupName>
@@ -601,6 +598,9 @@
               <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
     </Target>

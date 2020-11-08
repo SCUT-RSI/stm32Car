@@ -41,4 +41,4 @@ crucible\vl53l0x.o: ../Inc/vl53l0x_platform_log.h
 crucible\vl53l0x.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 crucible\vl53l0x.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 crucible\vl53l0x.o: ../Inc/vl53l0x.h
-crucible\vl53l0x.o: ../Inc/vl53l0x_it.h
+crucible\vl53l0x.o: ../Inc/vl53l0x_gen.h

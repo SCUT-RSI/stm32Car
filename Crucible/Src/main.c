@@ -107,7 +107,7 @@ int main(void)
   uint8_t POLE_RY=0;
   uint8_t POLE_LX=0;
   uint8_t POLE_LY=0;
-  
+  HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
   
   /* USER CODE END 2 */
 
@@ -115,11 +115,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  
+	 
 	  /***Ò£¿Ø°´¼ü¡¤***/
 	  switch(PS2_DataKey())
 	  {
-		  case PSB_SELECT: printf("1");
+		  case PSB_SELECT: 
+			  printf("1");
+			  
 			  break;
 		  case PSB_L3: printf("2");
 			  break;

@@ -44,7 +44,7 @@ crucible\main.o: ../Inc/vl53l0x_platform_log.h
 crucible\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 crucible\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 crucible\main.o: ../Inc/vl53l0x.h
-crucible\main.o: ../Inc/vl53l0x_it.h
+crucible\main.o: ../Inc/vl53l0x_gen.h
 crucible\main.o: ../Inc/motor_B.h
 crucible\main.o: ../Inc/motor_D.h
 crucible\main.o: ../Inc/motor.h

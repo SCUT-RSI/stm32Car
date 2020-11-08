@@ -6,7 +6,7 @@
 
 #include "main.h"
 
-void jiaozhun(void); //校准函数
+uint8_t jiaozhun(void); //校准函数
 
 #endif
 

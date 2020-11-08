@@ -113,9 +113,9 @@ void vl53l0x_reset(VL53L0X_Dev_t *dev)
 {
 	uint8_t addr;
 	addr = dev->I2cDevAddr;//保存设备原I2C地址
-    VL53L0X_Xshut=0;//失能VL53L0X
+    B_LAZER_Xshut=0;//失能VL53L0X
 	HAL_Delay(30);
-	VL53L0X_Xshut=1;//使能VL53L0X,让传感器处于工作(I2C地址会恢复默认0X52)
+	B_LAZER_Xshut=1;//使能VL53L0X,让传感器处于工作(I2C地址会恢复默认0X52)
 	HAL_Delay(30);	
 	dev->I2cDevAddr=0x52;
 	vl53l0x_Addr_set(dev,addr);//设置VL53L0X传感器原来上电前原I2C地址
@@ -138,9 +138,9 @@ VL53L0X_Error vl53l0x_init(VL53L0X_Dev_t *dev)
 	
 	
 	
-	VL53L0X_Xshut=0;//失能VL53L0X
+	B_LAZER_Xshut=0;//失能VL53L0X
 	HAL_Delay(30);
-	VL53L0X_Xshut=1;//使能VL53L0X,让传感器处于工作
+	B_LAZER_Xshut=1;//使能VL53L0X,让传感器处于工作
 	HAL_Delay(30);
 	
     vl53l0x_Addr_set(pMyDevice,0x54);//设置VL53L0X传感器I2C地址
@@ -150,17 +150,12 @@ VL53L0X_Error vl53l0x_init(VL53L0X_Dev_t *dev)
 	HAL_Delay(2);
 	Status = VL53L0X_GetDeviceInfo(pMyDevice,&vl53l0x_dev_info);//获取设备ID信息
     if(Status!=VL53L0X_ERROR_NONE) goto error;
-	
-	//AT24CXX_Read(0,(u8*)&Vl53l0x_data,sizeof(_vl53l0x_adjust));//读取24c02保存的校准数据,若已校准 Vl53l0x_data.adjustok==0xAA
-	//if(Vl53l0x_data.adjustok==0xAA)//已校准
-	// AjustOK=1;	
-	//else //没校准	
 	 AjustOK=0;
 	
 	error:
 	if(Status!=VL53L0X_ERROR_NONE)
 	{
-		print_pal_error(Status);//打印错误信息
+		print_pal_error(Status);
 		return Status;
 	}
   	
@@ -179,7 +174,7 @@ void vl53l0x_test(void)
 	 while(1)
 	 {
 		  
-		 vl53l0x_interrupt_test(&vl53l0x_dev,Default_Mode);//默认模式
+		 vl53l0x_general_test(&vl53l0x_dev,Default_Mode);//默认模式
 		 
 	 }
 }

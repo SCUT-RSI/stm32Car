@@ -7,8 +7,9 @@
 #include "main.h"
 #include "vl53l0x_api.h"
 #include "vl53l0x_platform.h"
-#include "vl53l0x_it.h"
+#include "vl53l0x_gen.h"
 #include "sys.h"
+
 
 
 
@@ -18,7 +19,9 @@
 #define VL53L0X_Addr 0x52
 
 //控制Xshut电平,从而使能VL53L0X工作 1:使能 0:关闭
-#define VL53L0X_Xshut PGout(14)	
+#define B_LAZER_Xshut PGout(14)
+#define SB_LAZER_Xshut PGout(13)
+#define SF_LAZER_Xshut PGout(12)
 
 //使能2.8V IO电平模式
 #define USE_I2C_2V8  1
