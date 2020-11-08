@@ -49,6 +49,7 @@ int fgetc(FILE *f)
   HAL_UART_Receive(&huart1, &ch, 1, 0xffff);
   return ch;
 }
+
 /** @addtogroup STM32F1xx_HAL_Driver
   * @{
   */

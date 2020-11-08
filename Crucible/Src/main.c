@@ -107,6 +107,8 @@ int main(void)
   uint8_t POLE_RY=0;
   uint8_t POLE_LX=0;
   uint8_t POLE_LY=0;
+  
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -178,12 +180,13 @@ int main(void)
 				}
 				else if(POLE_RY>=64&&POLE_RY<=191&&POLE_RX<50)
 				{
-					printf("ÓÒ×ª");
+					printf("×ó×ª");
 				}
 			  }
 			  break;
 		  }
 	  HAL_Delay(10);
+	  vl53l0x_test();
 	  
 	  
 	  

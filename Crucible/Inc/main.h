@@ -136,6 +136,7 @@ void Error_Handler(void);
 #define B_LAZER_CLK_GPIO_Port GPIOB
 #define B_LAZER_INT_Pin GPIO_PIN_4
 #define B_LAZER_INT_GPIO_Port GPIOB
+#define B_LAZER_INT_EXTI_IRQn EXTI4_IRQn
 #define LED_Pin GPIO_PIN_5
 #define LED_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
