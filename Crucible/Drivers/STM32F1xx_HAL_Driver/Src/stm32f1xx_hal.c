@@ -34,6 +34,21 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
+#include <stdio.h>
+extern UART_HandleTypeDef huart1;
+
+int fputc(int ch, FILE *f)
+{
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xffff);
+  return ch;
+}
+
+int fgetc(FILE *f)
+{
+  uint8_t ch = 0;
+  HAL_UART_Receive(&huart1, &ch, 1, 0xffff);
+  return ch;
+}
 
 /** @addtogroup STM32F1xx_HAL_Driver
   * @{
@@ -377,7 +392,6 @@ __weak void HAL_Delay(uint32_t Delay)
   {
     wait += (uint32_t)(uwTickFreq);
   }
-
   while ((HAL_GetTick() - tickstart) < wait)
   {
   }

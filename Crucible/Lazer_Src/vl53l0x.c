@@ -1,22 +1,11 @@
 #include "vl53l0x.h"
 
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK NANO STM32开发板
-//VL53L0X-功能测试 驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2017/7/1
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2009-2019
-//All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 
 
-VL53L0X_Dev_t vl53l0x_dev;//设备I2C数据参数
+
+VL53L0X_Dev_t vl53l0x_dev0,vl53l0x_dev1,vl53l0x_dev2;//设备I2C数据参数
 VL53L0X_DeviceInfo_t vl53l0x_dev_info;//设备ID版本信息
 //_vl53l0x_adjust Vl53l0x_data;   //校准数据24c02读缓存区（用于系统初始化时向24C02读取数据）
-uint8_t AjustOK=0;//校准标志位
+
 
 //VL53L0X各测量模式参数
 //0：默认;1:高精度;2:长距离;3:高速
@@ -124,9 +113,9 @@ void vl53l0x_reset(VL53L0X_Dev_t *dev)
 {
 	uint8_t addr;
 	addr = dev->I2cDevAddr;//保存设备原I2C地址
-    VL53L0X_Xshut=0;//失能VL53L0X
+    B_LAZER_Xshut=0;//失能VL53L0X
 	HAL_Delay(30);
-	VL53L0X_Xshut=1;//使能VL53L0X,让传感器处于工作(I2C地址会恢复默认0X52)
+	B_LAZER_Xshut=1;//使能VL53L0X,让传感器处于工作(I2C地址会恢复默认0X52)
 	HAL_Delay(30);	
 	dev->I2cDevAddr=0x52;
 	vl53l0x_Addr_set(dev,addr);//设置VL53L0X传感器原来上电前原I2C地址
@@ -135,7 +124,7 @@ void vl53l0x_reset(VL53L0X_Dev_t *dev)
 
 //初始化vl53l0x
 //dev:设备I2C参数结构体
-VL53L0X_Error vl53l0x_init(VL53L0X_Dev_t *dev)
+VL53L0X_Error vl53l0x_init(VL53L0X_Dev_t *dev, uint8_t ID)
 {
 	
 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
@@ -147,14 +136,31 @@ VL53L0X_Error vl53l0x_init(VL53L0X_Dev_t *dev)
 	pMyDevice->comms_type = 1;           //I2C通信模式
 	pMyDevice->comms_speed_khz = 400;    //I2C通信速率
 	
-	
-	
-	VL53L0X_Xshut=0;//失能VL53L0X
-	HAL_Delay(30);
-	VL53L0X_Xshut=1;//使能VL53L0X,让传感器处于工作
-	HAL_Delay(30);
-	
-    vl53l0x_Addr_set(pMyDevice,0x54);//设置VL53L0X传感器I2C地址
+	switch(ID)
+	{
+		case 0:
+			B_LAZER_Xshut=0;
+			HAL_Delay(30);
+			B_LAZER_Xshut=1;//使能VL53L0X,让传感器处于工作
+			HAL_Delay(40);
+			vl53l0x_Addr_set(pMyDevice,0x54);//设置VL53L0X传感器I2C地址
+			break;
+		case 1:
+			SB_LAZER_Xshut=0;
+			HAL_Delay(30);
+			SB_LAZER_Xshut=1;//使能VL53L0X,让传感器处于工作
+			HAL_Delay(40);
+			vl53l0x_Addr_set(pMyDevice,0x56);//设置VL53L0X传感器I2C地址
+			break;
+		case 2:
+			SF_LAZER_Xshut=0;
+			HAL_Delay(30);
+			SF_LAZER_Xshut=1;//使能VL53L0X,让传感器处于工作
+			HAL_Delay(40);
+			vl53l0x_Addr_set(pMyDevice,0x58);//设置VL53L0X传感器I2C地址
+			break;
+	}
+
     if(Status!=VL53L0X_ERROR_NONE) goto error;
 	Status = VL53L0X_DataInit(pMyDevice);//设备初始化
 	if(Status!=VL53L0X_ERROR_NONE) goto error;
@@ -162,36 +168,16 @@ VL53L0X_Error vl53l0x_init(VL53L0X_Dev_t *dev)
 	Status = VL53L0X_GetDeviceInfo(pMyDevice,&vl53l0x_dev_info);//获取设备ID信息
     if(Status!=VL53L0X_ERROR_NONE) goto error;
 	
-	//AT24CXX_Read(0,(u8*)&Vl53l0x_data,sizeof(_vl53l0x_adjust));//读取24c02保存的校准数据,若已校准 Vl53l0x_data.adjustok==0xAA
-	//if(Vl53l0x_data.adjustok==0xAA)//已校准
-	// AjustOK=1;	
-	//else //没校准	
-	 AjustOK=0;
-	
 	error:
 	if(Status!=VL53L0X_ERROR_NONE)
 	{
-		print_pal_error(Status);//打印错误信息
+		print_pal_error(Status);
 		return Status;
 	}
   	
 	return Status;
 }
 
-//VL53L0X主测试程序
-void vl53l0x_test(void)
-{   
-	 while(vl53l0x_init(&vl53l0x_dev))
-	 {
-        HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-		HAL_Delay(500);
-	}
-	 
-	 while(1)
-	 {
-		  
-		 vl53l0x_interrupt_test(&vl53l0x_dev,Default_Mode);//默认模式
-		 
-	 }
-}
+   
+
 

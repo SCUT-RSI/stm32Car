@@ -27,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "vl53l0x.h"
+#include "vl53l0x_gen.h"
 #include "motor_B.h"
 #include "motor_D.h"
 #include "motor.h"
@@ -93,6 +94,8 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
+  
+  
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -103,43 +106,107 @@ int main(void)
   MX_TIM5_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-
+  uint8_t POLE_RX=0;
+  uint8_t POLE_RY=0;
+  uint8_t POLE_LX=0;
+  uint8_t POLE_LY=0;
+  B_LAZER_Xshut=0;
+  SB_LAZER_Xshut=0;
+  SF_LAZER_Xshut=0;
+  vl53l0x_init(&vl53l0x_dev0,0);
+  vl53l0x_init(&vl53l0x_dev1,1);
+  vl53l0x_init(&vl53l0x_dev2,2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	 
 	  /***遥控按键·***/
 	  switch(PS2_DataKey())
 	  {
-		  case PSB_SELECT:
+		  case PSB_SELECT: 
+			  printf("1");
 			  break;
-		  case PSB_L3: 
+		  case PSB_L3: printf("2");
 			  break;
-		  case PSB_R3:
+		  case PSB_R3: printf("3");
 			  break;
-		  case PSB_START:
+		  case PSB_START: printf("4");
 			  break;
-		  case PSB_PAD_UP:
+		  case PSB_PAD_UP: printf("5");
 			  break;
-		  case PSB_PAD_RIGHT:
+		  case PSB_PAD_RIGHT: printf("6");
 			  break;
-		  case PSB_PAD_DOWN:
+		  case PSB_PAD_DOWN: printf("7");
 			  break;
-		  case PSB_PAD_LEFT:
+		  case PSB_PAD_LEFT: printf("8");
 			  break;
-		  case PSB_L2:
+		  case PSB_L2: printf("9");
+			  catch_2();
 			  break;
-		  case PSB_R2:
+		  case PSB_R2: printf("10");
+			  release_1();
 			  break;
-		  case PSB_L1:
+		  case PSB_L1: printf("11");
+			  catch_1();
 			  break;
-		  case
+		  case PSB_R1: printf("12");
+			  release_2();
+			  break;
+		  case PSB_GREEN: printf("13");
+			  break;
+		  case PSB_RED: printf("14");
+			  break;
+		  case PSB_BLUE: printf("15");
+			  break;
+		  case PSB_PINK: printf("16");
+			  break;
+		  case 0: 
+			  POLE_RX=PS2_AnologData(PSS_RX);
+			  POLE_RY=PS2_AnologData(PSS_RY);
+			  POLE_LX=PS2_AnologData(PSS_LX);
+			  POLE_LY=PS2_AnologData(PSS_LY);
+			  if(POLE_LX != 128||POLE_LY != 128||POLE_RX != 128 ||POLE_RY != 128)
+			  {
+				if(POLE_LX>=64&&POLE_LX<=191&&POLE_LY>178)
+				{
+					move_backward();
+					printf("后");		
+				}
+				else if(POLE_LX>=64&&POLE_LX<=191&&POLE_LY<50)
+				{
+					move_forward();
+					printf("前");
+				}
+				else if(POLE_LY>=64&&POLE_LY<=191&&POLE_LX<50)
+				{
+					move_left();
+					printf("左");
+				}
+				else if(POLE_LY>=64&&POLE_LY<=191&&POLE_LX>178)
+				{
+					move_right();
+					printf("右");
+				}
+				else if(POLE_RY>=64&&POLE_RY<=191&&POLE_RX>178)
+				{
+					move_Scircle();
+					printf("右转");
+				}
+				else if(POLE_RY>=64&&POLE_RY<=191&&POLE_RX<50)
+				{
+					move_Ncircle();
+					printf("左转");
+				}
+			  }
+			  break;
+		  }
+	  HAL_Delay(10);
+
 		  
-		  
-		  
-	  }
+	  
 	  
 	  
 	  

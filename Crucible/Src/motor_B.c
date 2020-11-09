@@ -21,8 +21,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		//修改重装载寄存器
 		//修改占空比
 		
-		TIM5->CCR3=(srd.step_delay >> 1) ;
-		TIM5->CCR4=(srd.step_delay >> 1) ;
+		TIM5->CCR1=(srd.step_delay >> 1) ;
+		TIM5->CCR2=(srd.step_delay >> 1) ;
 		TIM5->ARR=srd.step_delay;
 		if(status.out_ena != TRUE)
 		{
@@ -86,7 +86,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		}
 	}
 
-
+//步数记录器
 void MSD_StepCounter(signed char inc)
 {
  
@@ -170,7 +170,6 @@ void MOTER_MOVE(int step, uint32_t accel, uint32_t decel, uint32_t speed)
 		srd.accel_count = 0;
 		status.running = TRUE;
 		HAL_TIM_Base_Start_IT(&htim5);
-		HAL_TIM_PWM_Start(&htim5,TIM_CHANNEL_3);
 		HAL_TIM_PWM_Start(&htim5,TIM_CHANNEL_4);
 	}
 }

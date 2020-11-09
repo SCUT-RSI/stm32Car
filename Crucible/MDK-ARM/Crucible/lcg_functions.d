@@ -42,7 +42,7 @@ crucible\lcg_functions.o: ../Inc/vl53l0x_platform_log.h
 crucible\lcg_functions.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 crucible\lcg_functions.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 crucible\lcg_functions.o: ../Inc/vl53l0x.h
-crucible\lcg_functions.o: ../Inc/vl53l0x_it.h
+crucible\lcg_functions.o: ../Inc/vl53l0x_gen.h
 crucible\lcg_functions.o: ../Inc/motor_B.h
 crucible\lcg_functions.o: ../Inc/motor_D.h
 crucible\lcg_functions.o: ../Inc/motor.h

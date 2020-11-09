@@ -41,7 +41,7 @@ crucible\vl53l0x_api_core.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 crucible\vl53l0x_api_core.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 crucible\vl53l0x_api_core.o: ../Inc/vl53l0x.h
 crucible\vl53l0x_api_core.o: ../Inc/vl53l0x_api.h
-crucible\vl53l0x_api_core.o: ../Inc/vl53l0x_it.h
+crucible\vl53l0x_api_core.o: ../Inc/vl53l0x_gen.h
 crucible\vl53l0x_api_core.o: ../Inc/vl53l0x.h
 crucible\vl53l0x_api_core.o: ../Inc/vl53l0x_api_core.h
 crucible\vl53l0x_api_core.o: ../Inc/vl53l0x_api_calibration.h

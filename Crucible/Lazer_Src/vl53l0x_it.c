@@ -1,17 +1,5 @@
 #include "vl53l0x_it.h"
 
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK NANO STM32开发板
-//VL53L0X-中断测量模式 驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2018/7/18
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2018-2028
-//All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 
 
 //上下限距离值 单位:mm
 #define Thresh_Low  60
@@ -37,13 +25,13 @@ AlrmMode_t AlarmModes ={
 
 
 //外部中断服务函数
-void EXTI4_IRQHandler(void)
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	
-	VL53L0X_GetRangingMeasurementData(&vl53l0x_dev,&RangingMeasurementData);//获取测量距离,并且显示距离
+	VL53L0X_GetRangingMeasurementData(&vl53l0x_dev,&RangingMeasurementData);//获取测量距离
+	printf("d: %3d mm\r\n",RangingMeasurementData.RangeMilliMeter);
 	HAL_Delay(70);
 	VL53L0X_ClearInterruptMask(&vl53l0x_dev,0);//清除VL53L0X中断标志位 
-	__HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_5);//清除LINE5上的中断标志位 
 }
 
 extern uint8_t AjustOK;
@@ -59,13 +47,15 @@ void vl53l0x_interrupt_start(VL53L0X_Dev_t *dev,uint8_t mode)
 	 uint32_t refSpadCount;
 	 uint8_t isApertureSpads;
 	 VL53L0X_Error status=VL53L0X_ERROR_NONE;//工作状态
+	 
 
 	 
 
-     //vl53l0x_reset(dev);//复位vl53l0x(频繁切换工作模式容易导致采集距离数据不准，需加上这一代码)
+     vl53l0x_reset(dev);//复位vl53l0x(频繁切换工作模式容易导致采集距离数据不准，需加上这一代码)
 		
 	 status = VL53L0X_StaticInit(dev);
 	 if(status!=VL53L0X_ERROR_NONE) goto error;
+	 
 	 status = VL53L0X_PerformRefCalibration(dev, &VhvSettings, &PhaseCal);//Ref参考校准
 	 if(status!=VL53L0X_ERROR_NONE) goto error;
 	 HAL_Delay(2);
@@ -109,6 +99,7 @@ void vl53l0x_interrupt_start(VL53L0X_Dev_t *dev,uint8_t mode)
 	 if(status!=VL53L0X_ERROR_NONE) goto error;
 	 HAL_Delay(2);
 	 status = VL53L0X_ClearInterruptMask(dev,0);//清除VL53L0X中断标志位
+	 HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 	 
 	 error://错误信息
 	 if(status!=VL53L0X_ERROR_NONE)
