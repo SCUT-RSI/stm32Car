@@ -14,7 +14,10 @@
 
 
 
-
+//三个激光的ID
+#define B	0
+#define SB	1
+#define SF	2
 //VL53L0X传感器上电默认IIC地址为0X52(不包含最低位)
 #define VL53L0X_Addr 0x52
 
@@ -46,6 +49,9 @@ typedef __packed struct
 extern mode_data Mode_data[];
 extern VL53L0X_Dev_t vl53l0x_dev;
 extern VL53L0X_DeviceInfo_t vl53l0x_dev_info;
+extern VL53L0X_Dev_t vl53l0x_dev0;
+extern VL53L0X_Dev_t vl53l0x_dev1;
+extern VL53L0X_Dev_t vl53l0x_dev2;
 //vl53l0x传感器校准信息结构体定义
 typedef __packed struct
 {
@@ -63,11 +69,9 @@ typedef __packed struct
 
 extern _vl53l0x_adjust Vl53l0x_data;
 
-extern uint8_t AjustOK;
-
-VL53L0X_Error vl53l0x_init(VL53L0X_Dev_t *dev);//初始化vl53l0x
+VL53L0X_Error vl53l0x_init(VL53L0X_Dev_t *dev,uint8_t ID);//初始化vl53l0x
 void print_pal_error(VL53L0X_Error Status);//错误信息打印
-void vl53l0x_test(void);//vl53l0x测试
+//void vl53l0x_test(void);//vl53l0x测试
 void vl53l0x_reset(VL53L0X_Dev_t *dev);//vl53l0x复位
 
 void vl53l0x_info(void);//获取vl53l0x设备ID信息

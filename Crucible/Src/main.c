@@ -27,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "vl53l0x.h"
+#include "vl53l0x_gen.h"
 #include "motor_B.h"
 #include "motor_D.h"
 #include "motor.h"
@@ -93,6 +94,8 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
+  
+  
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -107,8 +110,12 @@ int main(void)
   uint8_t POLE_RY=0;
   uint8_t POLE_LX=0;
   uint8_t POLE_LY=0;
-  HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
-  
+  B_LAZER_Xshut=0;
+  SB_LAZER_Xshut=0;
+  SF_LAZER_Xshut=0;
+  vl53l0x_init(&vl53l0x_dev0,0);
+  vl53l0x_init(&vl53l0x_dev1,1);
+  vl53l0x_init(&vl53l0x_dev2,2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -188,7 +195,11 @@ int main(void)
 			  break;
 		  }
 	  HAL_Delay(10);
-	  vl53l0x_test();
+	  vl53l0x_general_test(&vl53l0x_dev0,Default_Mode);
+	  HAL_Delay(1000);
+	  vl53l0x_general_test(&vl53l0x_dev1,Default_Mode);
+		  
+	  
 	  
 	  
 	  

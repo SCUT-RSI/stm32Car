@@ -65,7 +65,10 @@ void MX_GPIO_Init(void)
                           |LF_MOTOR_IN2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, SF_LAZER_SC_Pin|SB_LAZER_SC_Pin|B_LAZER_SC_Pin|LAZER_SDA_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOG, SF_LAZER_SC_Pin|SB_LAZER_SC_Pin|B_LAZER_SC_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(LAZER_SDA_GPIO_Port, LAZER_SDA_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LAZER_CLK_GPIO_Port, LAZER_CLK_Pin, GPIO_PIN_RESET);

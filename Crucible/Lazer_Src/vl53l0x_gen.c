@@ -94,17 +94,16 @@ void vl53l0x_general_start(VL53L0X_Dev_t *dev,u8 mode)
 	
 	
 	vl53l0x_set_mode(dev,mode);//配置测量模式
-	while(1)
+	
+	if(Status==VL53L0X_ERROR_NONE)
 	{
-		 if(Status==VL53L0X_ERROR_NONE)
-		 {
-				Status = vl53l0x_start_single_test(dev,&vl53l0x_data,buf);//执行一次测量
-				printf("State;%i , %s\r\n",vl53l0x_data.RangeStatus,buf);//打印测量状态	
-				printf("d: %4imm\r\n",Distance_data);//打印测量距离
-		 }
-		 HAL_Delay(50);	
+		Status = vl53l0x_start_single_test(dev,&vl53l0x_data,buf);//执行一次测量
+		printf("State;%i , %s\r\n",vl53l0x_data.RangeStatus,buf);//打印测量状态	
+		printf("d: %4imm\r\n",Distance_data);//打印测量距离
+	}
+	HAL_Delay(10);	
 		
-	}	
+		
 	
 }
 
@@ -113,10 +112,6 @@ void vl53l0x_general_start(VL53L0X_Dev_t *dev,u8 mode)
 //mode:测量模式
 void vl53l0x_general_test(VL53L0X_Dev_t *dev, u8 mode)
 { 
-
 		vl53l0x_general_start(dev,mode);//启动测量
 		HAL_Delay(50);
-
-	
-	
 }
