@@ -9,7 +9,7 @@
 
 
 extern vu16 Distance_data;//¾àÀëÊı¾İ
-void vl53l0x_general_test(VL53L0X_Dev_t *dev,u8 mode);
+uint16_t vl53l0x_general_start(VL53L0X_Dev_t *dev,u8 mode);
 
 #endif
 

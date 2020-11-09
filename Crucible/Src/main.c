@@ -128,7 +128,6 @@ int main(void)
 	  {
 		  case PSB_SELECT: 
 			  printf("1");
-			  
 			  break;
 		  case PSB_L3: printf("2");
 			  break;
@@ -145,12 +144,16 @@ int main(void)
 		  case PSB_PAD_LEFT: printf("8");
 			  break;
 		  case PSB_L2: printf("9");
+			  catch_2();
 			  break;
 		  case PSB_R2: printf("10");
+			  release_1();
 			  break;
 		  case PSB_L1: printf("11");
+			  catch_1();
 			  break;
 		  case PSB_R1: printf("12");
+			  release_2();
 			  break;
 		  case PSB_GREEN: printf("13");
 			  break;
@@ -169,35 +172,39 @@ int main(void)
 			  {
 				if(POLE_LX>=64&&POLE_LX<=191&&POLE_LY>178)
 				{
+					move_backward();
 					printf("后");		
 				}
 				else if(POLE_LX>=64&&POLE_LX<=191&&POLE_LY<50)
 				{
+					move_forward();
 					printf("前");
 				}
 				else if(POLE_LY>=64&&POLE_LY<=191&&POLE_LX<50)
 				{
+					move_left();
 					printf("左");
 				}
 				else if(POLE_LY>=64&&POLE_LY<=191&&POLE_LX>178)
 				{
+					move_right();
 					printf("右");
 				}
 				else if(POLE_RY>=64&&POLE_RY<=191&&POLE_RX>178)
 				{
+					move_Scircle();
 					printf("右转");
 				}
 				else if(POLE_RY>=64&&POLE_RY<=191&&POLE_RX<50)
 				{
+					move_Ncircle();
 					printf("左转");
 				}
 			  }
 			  break;
 		  }
 	  HAL_Delay(10);
-	  vl53l0x_general_test(&vl53l0x_dev0,Default_Mode);
-	  HAL_Delay(1000);
-	  vl53l0x_general_test(&vl53l0x_dev1,Default_Mode);
+
 		  
 	  
 	  

@@ -86,7 +86,7 @@ VL53L0X_Error vl53l0x_start_single_test(VL53L0X_Dev_t *dev,VL53L0X_RangingMeasur
 //启动普通测量
 //dev：设备I2C参数结构体
 //mode模式配置 0:默认;1:高精度;2:长距离;3:高速
-void vl53l0x_general_start(VL53L0X_Dev_t *dev,u8 mode)
+uint16_t vl53l0x_general_start(VL53L0X_Dev_t *dev,u8 mode)
 {
 	static char buf[VL53L0X_MAX_STRING_LENGTH];//测试模式字符串字符缓冲区
 	VL53L0X_Error Status=VL53L0X_ERROR_NONE;//工作状态
@@ -101,17 +101,10 @@ void vl53l0x_general_start(VL53L0X_Dev_t *dev,u8 mode)
 		printf("State;%i , %s\r\n",vl53l0x_data.RangeStatus,buf);//打印测量状态	
 		printf("d: %4imm\r\n",Distance_data);//打印测量距离
 	}
-	HAL_Delay(10);	
+	return Distance_data;
 		
 		
 	
 }
 
-//vl53l0x普通测量模式测试
-//dev:设备I2C参数结构体
-//mode:测量模式
-void vl53l0x_general_test(VL53L0X_Dev_t *dev, u8 mode)
-{ 
-		vl53l0x_general_start(dev,mode);//启动测量
-		HAL_Delay(50);
-}
+

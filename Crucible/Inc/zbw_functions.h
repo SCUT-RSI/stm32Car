@@ -6,7 +6,7 @@
 
 #include "main.h"
 
-uint8_t jiaozhun(void); //校准函数
+uint8_t calibration_cube(void); //校准函数
 
 #endif
 

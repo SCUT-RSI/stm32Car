@@ -71,7 +71,6 @@ extern _vl53l0x_adjust Vl53l0x_data;
 
 VL53L0X_Error vl53l0x_init(VL53L0X_Dev_t *dev,uint8_t ID);//初始化vl53l0x
 void print_pal_error(VL53L0X_Error Status);//错误信息打印
-//void vl53l0x_test(void);//vl53l0x测试
 void vl53l0x_reset(VL53L0X_Dev_t *dev);//vl53l0x复位
 
 void vl53l0x_info(void);//获取vl53l0x设备ID信息
